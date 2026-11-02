@@ -1,0 +1,8 @@
+// Same locale order as i18n.js: tr, en, ja, zh-CN, ko, ru, de, es, fr, pt-BR, pl.
+export const cameraRows={
+cameraView:['Kamera görünümü','Camera view','カメラ表示','相机视图','카메라 보기','Вид камеры','Kameraansicht','Vista de cámara','Vue caméra','Visão da câmera','Widok kamery'],
+flightView:['Serbest uçuş','Free flight','自由飛行','自由飞行','자유 비행','Свободный полёт','Freiflug','Vuelo libre','Vol libre','Voo livre','Swobodny lot'],
+topView:['Tepeden','Top down','真上から','俯视','위에서 보기','Вид сверху','Draufsicht','Vista superior','Vue de dessus','Vista de cima','Widok z góry'],
+mapHint:['Sürükle: haritayı kaydır · Tekerlek: yakınlaştır · Tıkla: incele','Drag to pan · Scroll to zoom · Click to inspect','ドラッグで移動 · ホイールでズーム · クリックで調べる','拖动平移 · 滚轮缩放 · 点击查看','드래그: 이동 · 휠: 확대/축소 · 클릭: 살펴보기','Перетаскивание: перемещение · Колесо: масштаб · Щелчок: осмотр','Ziehen: verschieben · Mausrad: zoomen · Klicken: untersuchen','Arrastra para desplazar · Rueda para acercar · Clic para inspeccionar','Glissez pour déplacer · Molette pour zoomer · Cliquez pour inspecter','Arraste para mover · Role para ampliar · Clique para inspecionar','Przeciągnij, aby przesuwać · Kółko: przybliżanie · Kliknij, aby sprawdzić'],
+mapViewUnavailable:['Bu harita tepeden görünümü desteklemiyor.','This map does not support the top-down view.','このマップは真上からの表示に対応していません。','此地图不支持俯视视图。','이 지도는 위에서 보기를 지원하지 않습니다.','Эта карта не поддерживает вид сверху.','Diese Karte unterstützt keine Draufsicht.','Este mapa no admite la vista superior.','Cette carte ne prend pas en charge la vue de dessus.','Este mapa não é compatível com a vista de cima.','Ta mapa nie obsługuje widoku z góry.']
+};

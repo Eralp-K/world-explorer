@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="tr">
-<head><script src="/theme-init.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#faf6f0"><title>World Explorer — Minecraft dünyalarını keşfet</title><link rel="icon" type="image/svg+xml" href="/brand/world-explorer-icon.svg"><link rel="stylesheet" href="/explorer.css"><link rel="stylesheet" href="/terra.css"><link rel="stylesheet" href="/theme.css"><script type="module" src="/explorer.js"></script></head>
+<head><script src="/theme-init.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#faf6f0"><title>World Explorer — Minecraft dünyalarını keşfet</title><link rel="icon" type="image/svg+xml" href="/brand/world-explorer-icon.svg"><link rel="stylesheet" href="/explorer.css"><link rel="stylesheet" href="/terra.css"><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/camera.css"><script type="module" src="/explorer.js"></script></head>
 <body>
 <div id="map-container"></div><div id="app" hidden></div>
 <section id="home">
@@ -28,6 +28,8 @@
 </section>
 <div id="explorer" hidden>
   <header id="toolbar"><a id="home-button" class="menu-return" href="/?view=home" title="Ana menüye dön" aria-label="Ana menüye dön"><span data-icon="back"></span><span class="menu-return-full">Ana menüye dön</span><span class="menu-return-short">Menü</span></a><div class="world-label"><strong id="world-name">Dünya</strong><small id="world-version"></small></div><span class="divider"></span><select id="dimension" aria-label="Boyut"></select><div class="search-box"><span data-icon="search"></span><input id="search" placeholder="Blok, entity veya X Y Z ara…" aria-label="Dünyada ara"><kbd>/</kbd></div><span id="distance-badge" class="pill">32 chunk</span><button id="settings-button" title="Kamera ve performans" aria-label="Kamera ve performans ayarları"><span data-icon="settings"></span></button><button class="help-button" data-help title="Kontroller" aria-label="Kontroller"><span data-icon="help"></span></button></header>
+  <div id="camera-view-switch" role="group" aria-label="Kamera görünümü"><button type="button" data-camera-mode="free" aria-pressed="true"><span data-icon="compass"></span><span>Serbest uçuş</span></button><button type="button" data-camera-mode="top" aria-pressed="false"><span data-icon="map"></span><span>Tepeden</span></button></div>
+  <div id="map-hint">Sürükle: haritayı kaydır · Tekerlek: yakınlaştır · Tıkla: incele</div>
   <div id="search-results" hidden></div>
   <aside id="tools" aria-label="Dünya araçları"><button id="layers-button" title="Katmanlar"><span data-icon="layers"></span><small>Katmanlar</small></button><button id="cut-button" title="Y kesiti"><span data-icon="slice"></span><small>Y kesiti</small></button><button id="update-button" title="Değişen chunkları güncelle"><span data-icon="refresh"></span><small>Güncelle</small></button></aside>
   <div id="crosshair">+</div><div id="fly-hint"><span class="hint-mouse" data-icon="mouse"></span><strong>Keşfetmek için dünyaya tıkla</strong><span><kbd>W A S D</kbd> hareket <span class="hint-separator">·</span> <kbd>Shift</kbd> hızlan <span class="hint-separator">·</span> <kbd>Esc</kbd> serbest bırak</span></div>

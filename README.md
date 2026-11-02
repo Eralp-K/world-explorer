@@ -12,7 +12,7 @@ Open a world folder or ZIP backup and prepare a browsable map on your own comput
 
 ## Features
 
-- Free-flight exploration across Overworld, Nether and End.
+- Free-flight exploration across Overworld, Nether and End, plus a native BlueMap top-down map view with drag-to-pan and wheel zoom.
 - Prepare an area around the latest saved player position, or the whole generated world. No map mod required; spawn is the fallback.
 - Search and inspect blocks, containers, signs, written books and raw NBT.
 - Adjustable view distance, detail budgets and adaptive rendering settings.
@@ -50,7 +50,7 @@ Choose a folder containing `level.dat`, or open a ZIP backup. Start with a **2,0
 
 ## Controls
 
-Click the world to capture the mouse. **W/A/S/D** move, **Space** rises, **Ctrl/C** descends, **Shift** accelerates, and scrolling adjusts flight speed. Left-click to inspect; **Esc** releases the mouse, **F1** toggles the interface and **/** opens search. See the Controls dialog for details. **Main menu** returns to world selection.
+Click the world to capture the mouse. **W/A/S/D** move, **Space** rises, **Ctrl/C** descends, **Shift** accelerates, and scrolling adjusts flight speed. Left-click to inspect; **Esc** releases the mouse, **F1** toggles the interface and **/** opens search. Use the **Free flight / Top down** switch above the map to change camera mode. In top-down view, drag to pan, scroll to zoom and click nearby detailed terrain to inspect it. Returning to flight keeps the original pose if you have not panned; otherwise it starts above the new map center. See the Controls dialog for details. **Main menu** returns to world selection.
 
 ## Beta limitations
 

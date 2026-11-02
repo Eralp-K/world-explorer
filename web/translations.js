@@ -236,3 +236,6 @@ export const rows = {
 
 import { extraLanguages } from './translations-extra.js';
 for (const [key, values] of Object.entries(rows)) values.push(...(extraLanguages[key] || []));
+
+import { cameraRows } from './camera-translations.js';
+Object.assign(rows,cameraRows);

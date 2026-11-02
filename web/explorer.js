@@ -1,4 +1,5 @@
 import { SpectatorControls } from './freecam.js';
+import { CameraModes } from './camera-modes.js';
 import { WorldVisuals, SHADER_PRESETS, shaderProfile, shaderSource, validateShader } from './visuals.js';
 import { detailBudget, installMapBudget, AdaptiveDetail } from './performance.js';
 import { FaunaLayer, livingType } from './fauna.js';
@@ -14,13 +15,15 @@ let bootstrap, state, app, viewer, controls, activeDim, loading = false, viewerL
 let lastMarkers = '', markerBusy = false, inspectBusy = false, toastTimer, searchTimer, availableKey = '', uiTick = 0;
 let lastRenderPhase = '', lastTileRetry = 0, polling = false;
 let visuals=null, fauna=null, clouds=null, faunaBusy=false, lastFauna='', frameTime=0;
+let cameraModes=null;
 const adaptive=new AdaptiveDetail();
-let settings = { sensitivity: 1, speed: 15, fov: 75, sprint: 4,style:'natural',performanceMode:'balanced',adaptiveDetail:true,mobs:true,idleMobs:true,clouds:true,shaderStrength:1 };
+let settings = { sensitivity: 1, speed: 15, fov: 75, sprint: 4,style:'natural',performanceMode:'balanced',adaptiveDetail:true,mobs:true,idleMobs:true,clouds:true,shaderStrength:1,cameraMode:'free' };
 let renderOptions={mode:'player-radius',diameter:10000};
 try{renderOptions={...renderOptions,...JSON.parse(localStorage.getItem('explorer-render')||'{}')};}catch{}
 try { settings = { ...settings, ...JSON.parse(localStorage.getItem('explorer-camera') || '{}') }; } catch {}
 // New preference: old fixed 64-chunk sessions start at the lighter 32 default.
 settings.viewChunks = normalizeViewDistance(settings.viewChunks);
+settings.cameraMode=settings.cameraMode==='top'?'top':'free';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(message) { $('toast').textContent = message; $('toast').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').hidden = true, 6500); }
 async function api(url, data) {
@@ -69,7 +72,7 @@ function applyVisuals() {
   }
   clouds ||= new CloudLayer(viewer,window.BlueMap.Three);
   fauna.configure(settings.mobs&&$('entities').checked,settings.idleMobs);
-  clouds.configure(settings.clouds,activeDim.id);
+  clouds.configure(settings.clouds&&settings.cameraMode!=='top',activeDim.id);
   viewer.data.uniforms.ambientLight.value=settings.style==='soft'?0.6:0.8;
   applyResolution();
   const c=state.world.scope?.centers?.[activeDim.id];
@@ -119,6 +122,9 @@ async function initViewer() {
     app = window.bluemap; viewer = app.mapViewer;
     app.initEventSource = () => {}; // Static read-only snapshots need no server-player polling.
     app.appState.controls.pauseTileLoading = false;
+    viewer.events.addEventListener('bluemapMapInteraction',event=>{
+      if(settings.cameraMode==='top'&&!$('explorer').hidden&&!event.detail.data.doubleTap)inspect(event.detail.ray);
+    });
     const ready=state.availableMaps.includes(activeDim.mapId)?activeDim:state.world.dimensions.find(d=>state.availableMaps.includes(d.mapId));
     if(ready)await enterDimension(ready);
   } finally { viewerLoading = false; }
@@ -129,7 +135,22 @@ function attachControls() {
   controls = new SpectatorControls(viewer.renderer.domElement, settings, inspect, toast);
   cm.controls = controls; cm.distance = 0; cm.ortho = 0; cm.angle = Math.PI / 2; cm.tilt = 0;
   app.appState.controls.state = 'free'; viewer.camera.fov = settings.fov;
+  app.mapControls.minDistance=16;app.mapControls.maxDistance=Math.max(64,Math.min(2048,settings.viewChunks*16));
+  cameraModes=new CameraModes(app,controls);
+  try{cameraModes.select(settings.cameraMode);}catch{settings.cameraMode='free';saveSettings();toast(t('mapViewUnavailable'));}
+  syncCameraModeUI();
   applyViewDistance();
+}
+function syncCameraModeUI(){
+  document.body.classList.toggle('map-view',settings.cameraMode==='top');
+  for(const button of document.querySelectorAll('[data-camera-mode]'))button.setAttribute('aria-pressed',String(button.dataset.cameraMode===settings.cameraMode));
+  $('map-hint').textContent=t('mapHint');
+}
+function changeCameraMode(mode){
+  if(!viewer?.map||!cameraModes)return toast(t('waitRender'));
+  release();
+  try{cameraModes.select(mode);settings.cameraMode=cameraModes.mode;saveSettings();syncCameraModeUI();applyVisuals();applyViewDistance();refreshMarkers(true);refreshFauna(true);}
+  catch(error){toast(t(error.message));}
 }
 function currentBudget(){return detailBudget(settings.viewChunks,settings.performanceMode,adaptive.cap);}
 function applyResolution(){if(!viewer)return;const ratio=Math.min(1,1/window.devicePixelRatio)*currentBudget().scale*adaptive.scale;if(Math.abs(viewer.superSampling-ratio)>.01)viewer.superSampling=ratio;}
@@ -142,6 +163,7 @@ function applyViewDistance() {
   $('speed-hud').textContent=t('speedUnit',{count:num(Math.round(settings.speed))});
   $('fly-hint').title=t('detailInfo',{near:budget.near,far:budget.selected});
   if(!viewer?.map)return;
+  if(app?.mapControls)app.mapControls.maxDistance=Math.max(64,Math.min(2048,distance.hires));
   const p=viewer.controlsManager.position;
   installMapBudget(viewer.map,currentBudget);
   viewer.loadMapArea(p.x,p.z,budget.hires,budget.far);applyResolution();
@@ -152,9 +174,9 @@ async function enterDimension(d) {
   activeDim = d; $('dimension').value = d.id; clearMarkers();fauna?.clear();lastFauna='';
   if (!app.mapsMap.has(d.mapId)) { app.settings = null; await app.load(); }
   await app.switchMap(d.mapId, false);
-  attachControls();
   const spawn = state.world.scope?.centers?.[d.id] || (d.id === 'minecraft:overworld' ? state.world.spawn : { x: 0, y: d.id === 'minecraft:the_nether' ? 70 : 80, z: 0 });
   viewer.controlsManager.position.set(spawn.x, spawn.y + 3, spawn.z);
+  attachControls();
   applyViewDistance();
   viewer.data.uniforms.ambientLight.value = 0.8;
   patchCutaway();applyVisuals(); applyLayers(); await refreshMarkers(true);await refreshFauna(true);
@@ -252,9 +274,11 @@ async function refreshFauna(force=false){
     $('fauna-status').textContent=fauna.models?t('faunaCount',{count:fauna.modelCount}):t(fauna.error?'modelUnavailable':'modelLoading');
   }catch(e){console.warn(e);}finally{faunaBusy=false;}
 }
-function centerHit() {
+function centerHit(screenRay=null) {
   if (!viewer?.map) return null;
-  const T = window.BlueMap.Three, ray = new T.Raycaster(); ray.setFromCamera(new T.Vector2(0, 0), viewer.camera); ray.far = 128;
+  const T = window.BlueMap.Three, ray = new T.Raycaster();
+  if(screenRay){ray.ray.copy(screenRay);ray.camera=viewer.camera;}else ray.setFromCamera(new T.Vector2(0, 0), viewer.camera);
+  ray.far=settings.cameraMode==='top'?Math.min(8000,viewer.controlsManager.distance+1200):128;
   const scene = viewer.map.hiresTileManager.scene; scene.position.x = 0; scene.position.z = 0; scene.updateMatrixWorld(true);
   const objects = $('terrain').checked ? [scene] : [];
   if (markerGroup) { markerGroup.updateMatrixWorld(true); objects.push(markerGroup); }
@@ -271,8 +295,8 @@ function centerHit() {
   }
   return null;
 }
-async function inspect() {
-  if (inspectBusy) return; const hit = centerHit();
+async function inspect(screenRay=null) {
+  if (inspectBusy) return; const hit = centerHit(screenRay);
   if (!hit) { toast(t('noBlock')); return; }
   inspectBusy = true;
   try {
@@ -347,7 +371,7 @@ async function search() {
     const list = $('search-results'); list.replaceChildren(); list.hidden = false;
     for (const r of data.results) {
       const button = document.createElement('button'); button.innerHTML = `<span class="result-name">${esc(nice(r.id))}<small>${esc(kindName(r.kind))}${r.count ? esc(t('sectionBlocks',{count:num(r.count)})) : ''}</small></span><small>${pos(r)}</small>`;
-      button.onclick = () => { if (!viewer) return toast(t('waitRender')); const cm = viewer.controlsManager; cm.position.set(r.x + 0.5, r.y + 1.5, r.z + 3.5); cm.rotation = 0; cm.angle = Math.PI / 2; list.hidden = true; refreshMarkers(true); };
+      button.onclick = () => { if (!viewer) return toast(t('waitRender')); const cm = viewer.controlsManager; cm.position.set(r.x + 0.5, r.y + 1.5, r.z + 3.5); cm.rotation = 0; cm.angle = settings.cameraMode==='top'?0:Math.PI / 2; list.hidden = true; refreshMarkers(true); };
       list.append(button);
     }
     if (!data.results.length) { const p = document.createElement('p'); p.textContent = t(data.indexing ? 'indexingResults' : 'noResults'); list.append(p); }
@@ -410,8 +434,11 @@ try {
   visualButton.onclick=()=>{const show=$('render-panel').hidden;document.querySelectorAll('.floating').forEach(p=>p.hidden=true);$('render-panel').hidden=!show;};
   for (const key of ['sensitivity', 'fov', 'speed', 'sprint']) { $(key).value = settings[key]; $(key).oninput = () => { settings[key] = Number($(key).value); if (viewer) viewer.camera.fov = settings.fov; saveSettings(); }; }
   mountUI();
+  for(const button of document.querySelectorAll('[data-camera-mode]'))button.onclick=()=>changeCameraMode(button.dataset.cameraMode);
+  syncCameraModeUI();
   document.addEventListener('explorer-languagechange',()=>{
     syncScopeControls();applyViewDistance();renderRecents();refreshDimensionLabels();
+    syncCameraModeUI();
     if(state?.world){updateUIStatus(state);applyVisuals();}
     stopButton.textContent=t('stop');visualButton.title=t('areaTitle');visualButton.innerHTML=icon('sun')+'<small>'+t('areaTool')+'</small>';
     // User-authored inspection content is left intact; reopen it in the selected language.
