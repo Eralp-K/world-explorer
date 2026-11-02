@@ -28,6 +28,19 @@ test('host checks, cross-origin policy and CSRF reject unauthorized world access
   const token=(await request('/api/bootstrap')).body().token;
   assert.equal((await request('/api/world/open',{method:'POST',data:{path:'C:/'},headers:{'x-explorer-token':token,origin:'https://evil.example'}})).status,403);
 });
+
+test('a clicked cross-site home link opens the app without permitting cross-site API or embedded access',async()=>{
+  const headers={'sec-fetch-site':'cross-site','sec-fetch-mode':'navigate','sec-fetch-dest':'document','sec-fetch-user':'?1'};
+  for(const url of ['/', '/?view=home']){
+    const home=await request(url,{headers});assert.equal(home.status,200);assert.match(home.text,/id="pick-world"/);
+  }
+  for(const url of ['/api/bootstrap','/api/world','/api/recents/clear','/?view=world'])assert.equal((await request(url,{headers})).status,403);
+  assert.equal((await request('/?view=home',{headers:{...headers,'sec-fetch-mode':'cors','sec-fetch-dest':'empty'}})).status,403);
+  assert.equal((await request('/?view=home',{headers:{...headers,'sec-fetch-dest':'iframe'}})).status,403);
+  assert.equal((await request('/?view=home',{headers:{...headers,'sec-fetch-user':'?0'}})).status,403);
+  assert.equal((await request('/?view=home',{headers:{...headers,host:'evil.example:8101'}})).status,403);
+  assert.equal((await request('/?view=home',{method:'POST',headers})).status,403);
+});
 test('world APIs require selection and static access cannot escape approved roots',async()=>{
   assert.equal((await request('/api/block?x=0&y=0&z=0')).status,409);
   assert.equal((await request('/vendor/%2e%2e%2flocal.config.json')).status,403);

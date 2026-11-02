@@ -116,13 +116,21 @@ export const handler = async (req, res) => {
   try {
     // Reject DNS rebinding, cross-origin reads and all mutations without a per-session token.
     if (![ `127.0.0.1:${port}`, `localhost:${port}` ].includes(req.headers.host)) throw fail('Invalid Host', 403);
-    if (req.headers['sec-fetch-site'] === 'cross-site') throw fail('Cross-site request rejected', 403);
+    const url = new URL(req.url, base), u = decodeURIComponent(url.pathname);
+    // A clicked link from the public download portal may open the static home
+    // document. It never grants cross-site access to bootstrap, world data,
+    // embedded documents, background fetches or state-changing requests.
+    const homeNavigation = req.method === 'GET' && u === '/' &&
+      (!url.searchParams.has('view') || url.searchParams.get('view') === 'home') &&
+      req.headers['sec-fetch-mode'] === 'navigate' &&
+      req.headers['sec-fetch-dest'] === 'document' &&
+      req.headers['sec-fetch-user'] === '?1';
+    if (req.headers['sec-fetch-site'] === 'cross-site' && !homeNavigation) throw fail('Cross-site request rejected', 403);
     if (!['GET', 'POST'].includes(req.method)) throw fail('Method not allowed', 405);
     if (req.method === 'POST') {
       if (req.headers['x-explorer-token'] !== token) throw fail('Invalid session token', 403);
       if (req.headers.origin && ![base, `http://localhost:${port}`].includes(req.headers.origin)) throw fail('Invalid origin', 403);
     }
-    const url = new URL(req.url, base), u = decodeURIComponent(url.pathname);
     if (u.includes('\0') || u.includes('\\') || u.split('/').includes('..')) throw fail('Invalid path', 403);
     if (u === '/api/bootstrap') return send(res, { token, recents, port, attribution: 'BlueMap 5.29 · MIT', itemNames: language });
     if (u === '/api/world' || u === '/api/render/status') return send(res, await snapshot());
