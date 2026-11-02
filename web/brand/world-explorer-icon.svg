@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="title">
+  <title id="title">World Explorer</title>
+  <!-- Simplified cube and compass for favicons and small interface controls. -->
+  <g stroke="#a7d4b0" stroke-width="2.5" stroke-linejoin="round">
+    <path d="m10 23 22-13 22 13-22 14Z" fill="#3d6a4a"/>
+    <path d="m10 23 22 14v23L10 46Z" fill="#202b23"/>
+    <path d="m32 37 22-14v23L32 60Z" fill="#4a7c59"/>
+  </g>
+  <path d="m32 14 2.5 7 9.5 2-9.5 2-2.5 8-2.5-8-9.5-2 9.5-2Z" fill="#a7d4b0"/>
+  <path d="m32 20.5 2.5 2.5-2.5 2.5-2.5-2.5Z" fill="#d49a42"/>
+</svg>

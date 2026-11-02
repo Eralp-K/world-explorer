@@ -1,0 +1,10 @@
+{
+  "format": "world-explorer-shader",
+  "version": 1,
+  "name": "Forest",
+  "exposure": 1.04,
+  "saturation": 1.12,
+  "contrast": 1.07,
+  "warmth": 0.025,
+  "fog": 0.25
+}

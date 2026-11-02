@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">World Explorer</title>
+  <desc id="desc">A green isometric cube with a compass rose, surrounded by a compass ring.</desc>
+  <!-- Original geometric redraw of the supplied logo. All empty areas are transparent. -->
+  <g fill="#3d6a4a" stroke="#3d6a4a" stroke-width="30">
+    <circle cx="640" cy="640" r="410" fill="none"/>
+    <path d="m640 80-47 148h94Z M1200 640l-148-47v94Z M640 1200l47-148h-94Z M80 640l148 47v-94Z" stroke="none"/>
+  </g>
+  <path d="m640 180-49 160h98Z M640 1120l49-160h-98Z" fill="#a7d4b0"/>
+  <g stroke="#a7d4b0" stroke-width="28" stroke-linejoin="miter">
+    <path d="m320 500 320-180 320 180-320 200Z" fill="#3d6a4a"/>
+    <path d="m320 500 320 200v300L320 820Z" fill="#202b23"/>
+    <path d="m640 700 320-200v320l-320 180Z" fill="#4a7c59"/>
+  </g>
+  <g stroke="#a7d4b0" stroke-width="18">
+    <path d="M674 422a94 94 0 0 1 54 54 M728 544a94 94 0 0 1-54 54 M606 598a94 94 0 0 1-54-54 M552 476a94 94 0 0 1 54-54"/>
+  </g>
+  <path d="m640 360 28 122 162 28-162 28-28 122-28-122-162-28 162-28Z" fill="#a7d4b0"/>
+  <path d="m640 482 28 28-28 28-28-28Z" fill="#d49a42"/>
+</svg>

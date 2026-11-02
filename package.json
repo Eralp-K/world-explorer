@@ -1,0 +1,8 @@
+{
+  "name": "minecraft-world-explorer",
+  "version": "0.7.1",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": { "start": "node backend/server.mjs", "test": "node --test tests/*.test.mjs", "check": "node --check backend/server.mjs && node --check web/explorer.js && node --test tests/*.test.mjs" }
+}

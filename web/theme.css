@@ -1,0 +1,83 @@
+#toolbar #home-button.menu-return{display:inline-flex;align-items:center;justify-content:center;gap:9px;flex-shrink:0;padding:11px 16px;border-radius:24px;background:#4a7c59;color:#fff;border:1px solid #4a7c59;font:600 12px 'Nunito Sans','Segoe UI',sans-serif;white-space:nowrap;min-height:42px;transition:background .15s}
+#toolbar #home-button.menu-return:hover{background:#3c6949;color:#fff}#home-button.menu-return>span{width:auto;height:auto}#home-button.menu-return svg{width:19px;height:19px}#home-button .menu-return-short{display:none}
+html[data-theme=dark] #toolbar #home-button.menu-return{background:#3a593e;border-color:#a7d4b035;color:#e4f2d9}html[data-theme=dark] #toolbar #home-button.menu-return:hover{background:#4a704d}
+@media(max-width:760px){#home-button .menu-return-full{display:none}#home-button .menu-return-short{display:inline}#toolbar #home-button.menu-return{padding:9px 12px;gap:6px;min-height:38px}}
+.theme-picker{position:relative;background:none;margin:0;padding:0;border-radius:0;color:inherit;font:inherit}
+.shader-import-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.shader-import-row button{font-size:12px}.shader-import-row small{overflow-wrap:anywhere}.shader-examples{font-size:11px;color:#b4d4a6}.shader-examples a{text-decoration:underline;text-underline-offset:3px}
+.theme-picker>summary{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;padding:0;background:#eeeae1;color:#4a6e4a;list-style:none;cursor:pointer}
+.theme-picker>summary::-webkit-details-marker{display:none}.theme-picker svg{width:19px;height:19px;flex-shrink:0}.theme-picker[open]>summary{outline:1px solid #87a376;background:#e5eadc}
+.theme-menu{position:absolute;right:0;top:48px;z-index:50;background:#fffdf8;border:1px solid #dedfd3;border-radius:16px;box-shadow:0 12px 35px #25372220;padding:6px;min-width:165px;display:grid;gap:3px}
+.theme-menu button{display:flex;align-items:center;gap:12px;text-align:left;background:none;color:#34402d;font-size:13px;padding:11px 12px;border-radius:10px;white-space:nowrap}.theme-menu button[aria-pressed=true]{background:#e5eddd;color:#31543a}.theme-menu button:hover{background:#eef1e5}
+.settings-theme{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#d6e0cf}.settings-theme .theme-picker>summary{background:#2d3c2e;color:#b4d4a6}.settings-theme .theme-menu{background:#26352a;border-color:#a7d4b040}.settings-theme .theme-menu button{color:#e8eddf}.settings-theme .theme-menu button:hover,.settings-theme .theme-menu button[aria-pressed=true]{background:#426246;color:#fff}
+html[data-theme=dark]{color-scheme:dark;background:#172019;color:#e7ecdf;--panel:#202b23;--line:#a7d4b025;--muted:#acb8a3;--accent:#a7d4b0;--ink:#172019;--shadow:0 6px 28px #0003}
+html[data-theme=dark] body{background:#172019;color:#e7ecdf}
+html[data-theme=dark] #home{background:radial-gradient(ellipse 600px 400px at 50% 150px,#37523c45,transparent),#172019}
+html[data-theme=dark] .home-nav{background:#172019ed;border-color:#a7d4b012}
+html[data-theme=dark] .brand{color:#edf0e5}html[data-theme=dark] .brand small{color:#a9b79f}
+html[data-theme=dark] h1,html[data-theme=dark] h2,html[data-theme=dark] h3{color:#eef1e6}
+html[data-theme=dark] .hero-tagline{color:#b3d0a3}html[data-theme=dark] .intro{color:#b2bda9}
+html[data-theme=dark] .eyebrow{color:#c4a66a}html[data-theme=dark] .feature-row,html[data-theme=dark] .safety-note{color:#aebfa5}
+html[data-theme=dark] .feature-row svg,html[data-theme=dark] a:hover{color:#a7d4b0}
+html[data-theme=dark] .pill{color:#bdcdb1;background:#a7d4b00d;border-color:#a7d4b018}html[data-theme=dark] .live-dot{background:#a7d4b0}
+html[data-theme=dark] .text-button{color:#b9c6af}html[data-theme=dark] .text-button:hover{background:#2d3c2e;color:#e6efdc}
+html[data-theme=dark] .import-card{background:#202b23;border-color:#a7d4b01c;box-shadow:0 12px 45px #0002}
+html[data-theme=dark] .card-icon,html[data-theme=dark] .world-icon{background:#a7d4b012;color:#b3d7a5}
+html[data-theme=dark] .step-tag,html[data-theme=dark] .field-caption{color:#aebf9f}
+html[data-theme=dark] button{background:#2d3b2e;color:#e1e9d8}
+html[data-theme=dark] button:hover{background:#3c513b;border-color:#a7d4b045}
+html[data-theme=dark] .primary{background:#4a7c59;color:#fff}html[data-theme=dark] .primary:hover{background:#598f68}
+html[data-theme=dark] .open-actions .primary small{color:#edf1df}
+html[data-theme=dark] .zip-button{background:#2d382b;border-color:#a7d4b014}html[data-theme=dark] .zip-button>span{color:#c4a66a}
+html[data-theme=dark] input,html[data-theme=dark] select{color:#e3ebd9;background:#172019;border-color:#a7d4b029;color-scheme:dark}
+html[data-theme=dark] input::placeholder{color:#93a089}html[data-theme=dark] select option,html[data-theme=dark] select optgroup{color:#e3ebd9;background:#202b23}
+html[data-theme=dark] select option:checked{background:#4a7c59;color:#fff}
+html[data-theme=dark] .path-row input{background:#172019;border-color:#a7d4b014}
+html[data-theme=dark] .path-row button{background:#bd9b5d;color:#1d271c}
+html[data-theme=dark] small,html[data-theme=dark] .quiet{color:#acb8a3}
+html[data-theme=dark] .import-note{border-color:#a7d4b01c}
+html[data-theme=dark] .area-card{background:linear-gradient(125deg,#202b23 60%,#283b2c)}
+html[data-theme=dark] .render-options legend{color:#edf0e4}html[data-theme=dark] .scope-size>div,html[data-theme=dark] .scope-toggle small{color:#acb8a3}
+html[data-theme=dark] .scope-size input{background:#172019}
+html[data-theme=dark] .presets button{background:#2b392b;color:#c6d5b8}html[data-theme=dark] .presets button:hover{background:#3d543b}
+html[data-theme=dark] .presets button[aria-pressed=true]{background:#4a7c59;color:#fff}
+html[data-theme=dark] .render-options #scope-size-info{background:#a7d4b008;color:#bfd3b0}
+html[data-theme=dark] .section-label{color:#edf0e4}html[data-theme=dark] .section-label>span{background:#2a382a;color:#b5c6a8}
+html[data-theme=dark] #clear-recents{background:none;color:#a8b69c}
+html[data-theme=dark] .recent{background:#202b23;border-color:#a7d4b00b}html[data-theme=dark] .recent:hover{background:#2a3b2b}
+html[data-theme=dark] .recent small{color:#a7b69c}html[data-theme=dark] .arrow{background:#4a7c59;color:#fff}
+html[data-theme=dark] footer{color:#a3b097;border-color:#a7d4b01b}html[data-theme=dark] footer a{color:#b7cfa6}
+html[data-theme=dark] .language-trigger{background:#29362a;color:#e4ecda;border-color:#a7d4b018}
+html[data-theme=dark] .language-trigger svg,html[data-theme=dark] .language-check{color:#b7d5a6}
+html[data-theme=dark] .language-trigger:hover,html[data-theme=dark] .language-trigger[aria-expanded=true]{background:#354a34;border-color:#a7d4b04a}
+html[data-theme=dark] .language-menu,html[data-theme=dark] .theme-menu{background:#202d23;border-color:#a7d4b02c;box-shadow:0 12px 35px #0005}
+html[data-theme=dark] .language-option,html[data-theme=dark] .theme-menu button{background:transparent;color:#e6eede}
+html[data-theme=dark] .language-option small{color:#a4b595}
+html[data-theme=dark] .language-option:hover,html[data-theme=dark] .language-option:focus-visible,html[data-theme=dark] .theme-menu button:hover{background:#314731;border-color:#a7d4b030}
+html[data-theme=dark] .language-option[aria-selected=true],html[data-theme=dark] .theme-menu button[aria-pressed=true]{background:#3b573b;color:#e8f2db}
+html[data-theme=dark] .theme-picker>summary{background:#29362a;color:#b7d5a6}html[data-theme=dark] .theme-picker[open]>summary{background:#354a34;outline-color:#a7d4b060}
+html[data-theme=dark] #toolbar{background:#202b23f7;color:#edf0e5;border-bottom:1px solid #a7d4b01b;box-shadow:0 4px 24px #0002}
+html[data-theme=dark] #toolbar .brand{color:#dfebd3}html[data-theme=dark] #toolbar .world-label small{color:#9daf91}
+html[data-theme=dark] #toolbar .divider{background:#a7d4b024}
+html[data-theme=dark] #toolbar #dimension,html[data-theme=dark] #toolbar .search-box{background:#172019;color:#d7e5c9}
+html[data-theme=dark] #toolbar input{color:#e3ecd9}html[data-theme=dark] #toolbar .search-box>span,html[data-theme=dark] #settings-button,html[data-theme=dark] .help-button{color:#acc99b}
+html[data-theme=dark] #toolbar #distance-badge{color:#b5d3a5;background:#a7d4b00d}
+html[data-theme=dark] #settings-button.active{background:#3d583a;color:#d8edc5}
+html[data-theme=dark] kbd{background:#ffffff08;color:#c2d2b4;border-color:#a7d4b025}
+html[data-theme=dark] dialog{background:#1d2820;color:#e7ecdf;border-color:#a7d4b029}
+html[data-theme=dark] dialog .panel-heading{border-color:#a7d4b025}
+html[data-theme=dark] dialog .panel-heading .eyebrow{color:#aecb9e}
+html[data-theme=dark] dialog .panel-heading button{background:#2e3d2e;color:#c2d3b4}
+html[data-theme=dark] #inspect-position{background:#2b392b;color:#b4c8a5}
+html[data-theme=dark] .inventory,html[data-theme=dark] .item-detail,html[data-theme=dark] .sign-face,html[data-theme=dark] details:not(.theme-picker){background:#263328;color:#c5d7b9}
+html[data-theme=dark] .slot{background:#314333;border-color:#a7d4b018}html[data-theme=dark] .slot.filled:hover,html[data-theme=dark] .slot.filled:focus-visible{background:#476245;border-color:#a7d4b080}
+html[data-theme=dark] .slot .count{color:#f1f5e8;text-shadow:0 1px 2px #000}html[data-theme=dark] .fallback-icon{color:#c4d8b7}
+html[data-theme=dark] .item-detail h3{color:#bedda9}html[data-theme=dark] .item-detail pre{background:#172019;color:#bfd2b3}
+html[data-theme=dark] pre{background:#172019;color:#bfd2b3}html[data-theme=dark] .nbt-data{border-color:#a7d4b020}
+html[data-theme=dark] .info-row,html[data-theme=dark] .shortcut-list>div{border-color:#a7d4b025}
+html[data-theme=dark] .info-row span:first-child,html[data-theme=dark] .book-controls{color:#aab99f}
+html[data-theme=dark] .sign-face>.quiet{color:#c1d5b1}
+html[data-theme=dark] .book-page{background:#283126;color:#e3e3ca;border-color:#443b2b;box-shadow:0 5px 20px #0003}
+html[data-theme=dark] .book-controls button{background:#334632;color:#c5dab7}
+html[data-theme=dark] .help-tip{background:#2d432c;color:#c3d9b3}
+html[data-theme=dark] #toast{background:#2a3c2a;color:#e3eed7;border-color:#a7d4b060}
+@media(max-width:760px){.home-nav{padding:14px 16px;gap:8px}.nav-actions{gap:8px!important}.theme-picker>summary{width:34px;height:34px}.language-control{min-width:115px}.language-trigger{padding:9px 10px}.brand{gap:8px;font-size:12px}.brand-logo{width:36px;height:36px}.brand small{font-size:7px}.theme-menu{right:-100px}.settings-theme .theme-menu{right:0}}

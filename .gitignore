@@ -1,0 +1,21 @@
+cache/
+state/
+local.config.json
+*.log
+node_modules/
+vendor/
+upstream-web/
+*VALIDATION.json
+*.zip
+*.mca
+*.dat
+*.sqlite*
+*.class
+backend/build/
+outputs/
+work/
+# Private save-specific validation utilities.
+scripts/check-containers.mjs
+scripts/check-world-api.mjs
+scripts/measure-scope.mjs
+scripts/validate-*.mjs

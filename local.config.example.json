@@ -1,0 +1,8 @@
+{
+  "jar": "vendor/bluemap-5.29-cli.jar",
+  "java": "C:/Path/To/Java/bin/java.exe",
+  "installedBlueMap": "C:/Path/To/BlueMap",
+  "clientJar": "C:/Path/To/BlueMap/data/minecraft-client-26.2.jar",
+  "minecraftInstall": "C:/Path/To/MinecraftInstall",
+  "existingRenders": []
+}

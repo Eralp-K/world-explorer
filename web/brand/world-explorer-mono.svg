@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="title">
+  <title id="title">World Explorer — monochrome</title>
+  <g stroke="#202b23" stroke-width="2.5" stroke-linejoin="round">
+    <path d="m10 23 22-13 22 13v23L32 60 10 46Z M10 23l22 14 22-14 M32 37v23"/>
+  </g>
+  <path d="m32 14 2.5 7 9.5 2-9.5 2-2.5 8-2.5-8-9.5-2 9.5-2Z" fill="#202b23"/>
+</svg>
