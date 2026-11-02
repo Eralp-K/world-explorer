@@ -6,6 +6,8 @@ Explore Minecraft Java worlds locally in 3D. Powered by [BlueMap](https://github
 
 **0.7.1 · Early beta · Windows first**
 
+The GitHub Pages download/setup portal is in `docs/`. It opens the locally running application; it does not run the Java/Node backend in the cloud. Enable it in repository **Settings → Pages → Deploy from a branch → main → /docs → Save**. Its project URL is `https://eralp-k.github.io/world-explorer/` once deployment completes.
+
 Open a world folder or ZIP backup and prepare a browsable map on your own computer. Save files remain untouched; extracted ZIPs, indexes and rendered maps are stored in a separate application cache.
 
 ## Features
