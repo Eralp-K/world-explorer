@@ -1,12 +1,13 @@
-import { rows } from './translations.js';
-import { mountLanguagePicker } from './language-picker.js';
+import { rows } from './translations.js?v=langs11';
+import { mountLanguagePicker } from './language-picker.js?v=langs11';
 
-export const LOCALES = Object.freeze(['tr','en','ja','zh-CN','ko','ru']);
-export const LANGUAGE_NAMES = Object.freeze(['Türkçe','English','日本語','简体中文','한국어','Русский']);
-const formats=['tr-TR','en-US','ja-JP','zh-CN','ko-KR','ru-RU'];
+export const LOCALES = Object.freeze(['tr','en','ja','zh-CN','ko','ru','de','es','fr','pt-BR','pl']);
+export const LANGUAGE_NAMES = Object.freeze(['Türkçe','English','日本語','简体中文','한국어','Русский','Deutsch','Español','Français','Português (Brasil)','Polski']);
+const formats=['tr-TR','en-US','ja-JP','zh-CN','ko-KR','ru-RU','de-DE','es-ES','fr-FR','pt-BR','pl-PL'];
 export function normalizeLocale(value) {
   const code=String(value||'').toLowerCase().replaceAll('_','-');
   if(code==='zh'||code==='zh-cn'||code==='zh-hans'||code.startsWith('zh-hans-'))return 'zh-CN';
+  if(code==='pt'||code.startsWith('pt-'))return 'pt-BR';
   return LOCALES.find(locale=>locale===code.split('-')[0])||'tr';
 }
 let locale='tr';
@@ -30,7 +31,12 @@ export function translateError(message,status=400) {
 }
 const textSources=new WeakMap(), attributeSources=new WeakMap();
 const languagePickers=[];
-const sourceKeys=new Map(Object.entries(rows).flatMap(([key,values])=>values.map(value=>[value,key])));
+// Authored interface text is Turkish. Keep its exact source mapping ahead of
+// coincidentally identical words in another language (e.g. Polish "blok").
+const sourceKeys=new Map([
+  ...Object.entries(rows).flatMap(([key,values])=>values.map(value=>[value,key])),
+  ...Object.entries(rows).map(([key,values])=>[values[0],key])
+]);
 // Never translate authored world content or renderer/vendor DOM by matching words.
 const excluded='#map-container,#app,#recents,#inspect-content,#inspect-title,#inspect-kind,#inspect-position,#world-name,#world-version,#search-results,#toast,#progress-text,#progress-detail,#progress-note,#progress-phase,#stop-render,#scope-center,#scope-size-info,[data-no-i18n],script,style,svg';
 export function localize(root=document.body) {

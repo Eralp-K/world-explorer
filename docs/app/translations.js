@@ -1,4 +1,4 @@
-// Columns: Turkish, English, Japanese, Simplified Chinese, Korean, Russian.
+// Columns: Turkish, English, Japanese, Simplified Chinese, Korean, Russian; then the five languages in translations-extra.js.
 // Keep player-authored world names, books, signs and raw NBT out of this catalog.
 export const rows = {
   modelLoading:['Oyunun canlı modelleri hazırlanıyor…','Preparing native creature models…','ゲームの生物モデルを準備中…','正在准备游戏生物模型…','게임 생물 모델 준비 중…','Подготовка моделей существ…'],
@@ -233,3 +233,6 @@ export const rows = {
   coordinateKind:['coordinate','coordinates','座標','坐标','좌표','координаты'],
   groupKind:['block-group','block group','ブロック群','方块组','블록 그룹','группа блоков']
 };
+
+import { extraLanguages } from './translations-extra.js?v=langs11';
+for (const [key, values] of Object.entries(rows)) values.push(...(extraLanguages[key] || []));

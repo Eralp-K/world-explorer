@@ -1,4 +1,4 @@
-import { t, formatNumber as num, dimensionName } from './i18n.js';
+import { t, formatNumber as num, dimensionName } from './i18n.js?v=langs11';
 const paths = {
   back:'<path d="M20 12H4m6-6-6 6 6 6"/>',
   compass:'<circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5Z"/>',

@@ -18,7 +18,7 @@ Open a world folder or ZIP backup and prepare a browsable map on your own comput
 - Adjustable view distance, detail budgets and adaptive rendering settings.
 - Lightweight visual profiles, custom World Explorer GLSL effects and clouds.
 - Nearby saved creatures for 33 supported vanilla types, with models and textures read from your locally installed client.
-- Terra interface with light/dark/system themes and Turkish, English, Japanese, Simplified Chinese, Korean and Russian options.
+- Terra interface with light/dark/system themes and Turkish, English, Japanese, Simplified Chinese, Korean, Russian, German, Spanish, French, Brazilian Portuguese and Polish options.
 - Native Windows folder/ZIP selection and recent worlds.
 
 ## Requirements
